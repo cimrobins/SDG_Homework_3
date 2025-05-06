@@ -71,7 +71,7 @@ I documented my process in the [model training notebook](notebooks/model_trainin
 My most valuable lesson was the importance of comprehensive evaluation. I initially focused solely on decision accuracy (82.3%), but realized this metric alone wasn't enough. I needed to evaluate:
 
 - How well each SDG was covered (ranging from 93.1% to 98.5%)
-- The quality of rationales (as judged by domain experts)
+- The quality and specificity of the generated rationales
 - Pattern analysis of error cases (which building types caused confusion)
 
 The [evaluation report](results/evaluation_report.md) documents my findings and analysis.
@@ -81,7 +81,7 @@ The [evaluation report](results/evaluation_report.md) documents my findings and 
 After several iterations, my model achieved:
 - 82.3% accuracy on retrofit/demolish decisions
 - 91.4% coverage of all four SDGs in recommendations
-- High ratings from human evaluators for explanation quality (4.2/5)
+- Comprehensive explanations connecting building characteristics to specific SDG considerations
 
 More importantly, I learned how to operationalize sustainability principles into AI applications, balancing multiple competing factors and creating transparent, explainable recommendations.
 

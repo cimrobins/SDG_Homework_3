@@ -11,7 +11,7 @@ This report documents the evaluation of my generative AI model developed to supp
 
 ### Overall Accuracy
 
-After training my model on 350 building examples and validating on 75 examples, I achieved the following results on my 75-example test set:
+After training my model on 350 building examples and validating on 75 examples, I tested it on my held-out test set of 75 examples:
 
 | Metric | Value | Notes |
 |--------|-------|-------|
@@ -20,7 +20,7 @@ After training my model on 350 building examples and validating on 75 examples, 
 | Demolish F1 Score | 0.78 | Balanced measure for demolish recommendations |
 | SDG Coverage | 91.4% | Percentage of recommendations addressing all four target SDGs |
 
-I was initially hoping for accuracy above 90%, but after discussing with my professor, I learned that 82.3% is actually quite strong for a complex decision task with genuine trade-offs between different sustainability goals.
+I was initially hoping for accuracy above 90%, but I realized that 82.3% is actually reasonable for a complex decision task with genuine trade-offs between different sustainability goals.
 
 ### Confusion Matrix
 
@@ -37,14 +37,14 @@ I noticed the model has a slight bias toward recommending retrofit (7 false posi
 
 ### SDG Coverage Analysis
 
-I evaluated how well my model addressed each individual SDG in its recommendations:
+I developed a simple metric to track whether each SDG was mentioned in the model's outputs:
 
-| SDG | Coverage | Quality Score (1-5) |
-|-----|----------|---------------------|
-| SDG 9 (Infrastructure) | 97.2% | 4.2 |
-| SDG 11 (Sustainable Cities) | 95.8% | 4.3 |
-| SDG 12 (Responsible Consumption) | 93.1% | 4.5 |
-| SDG 13 (Climate Action) | 98.5% | 4.1 |
+| SDG | Coverage |
+|-----|----------|
+| SDG 9 (Infrastructure) | 97.2% |
+| SDG 11 (Sustainable Cities) | 95.8% |
+| SDG 12 (Responsible Consumption) | 93.1% |
+| SDG 13 (Climate Action) | 98.5% |
 
 I found the model performed best on climate action considerations, likely because the training data had very clear patterns regarding energy efficiency and embodied carbon calculations. The model struggled most with responsible consumption aspects, particularly in cases with complex material reuse considerations.
 
@@ -119,16 +119,17 @@ SDG-Aligned Rationale:
 
 **Analysis:** In this case, the model incorrectly recommended retrofit when demolition would be more appropriate. The model seemed to underweight the poor energy performance and presence of hazardous materials. Looking at similar examples in my training data, I realized I had a slight imbalance - buildings with "Medium" adaptation potential were more frequently labeled for retrofit.
 
-## Qualitative Evaluation
+## My Qualitative Assessment
 
-I asked three classmates with backgrounds in architecture and environmental science to review 20 of the model's outputs without knowing the correct answers. Their feedback provided valuable insights:
+In addition to the quantitative metrics, I also did my own subjective assessment of the model outputs. Here are my observations:
 
-1. **Rationale Quality**: Average rating of 4.2/5 for quality of reasoning
-2. **SDG Relevance**: Average rating of 4.3/5 for appropriate application of SDG principles
-3. **Decision Clarity**: Average rating of 4.5/5 for clear explanation of recommendations
-4. **Actionability**: Average rating of 3.9/5 for providing actionable insights
+1. **Rationale Quality**: The model generally provided coherent reasoning, but sometimes made connections that were too generic.
+  
+2. **SDG Relevance**: Most outputs appropriately applied SDG principles to the building characteristics, but occasionally missed important nuances.
 
-The lowest scores were for actionability, with reviewers noting that while the reasoning was sound, some recommendations lacked specific next steps for implementation.
+3. **Decision Clarity**: The model was usually clear about its recommendations, though sometimes the reasoning felt repetitive.
+
+4. **Actionability**: This was the weakest area - while the model explained its reasoning, it often lacked specific next steps for implementation.
 
 ## Lessons Learned
 
@@ -136,13 +137,13 @@ Through this evaluation process, I've learned several important lessons:
 
 1. **Data quality matters more than quantity**: I initially focused on generating a large dataset, but later found that having fewer, more carefully crafted examples with realistic patterns led to better performance.
 
-2. **Trade-offs are inevitable**: No model will achieve perfect accuracy because many building decisions involve genuine sustainability trade-offs where different experts might reasonably disagree.
+2. **Trade-offs are inevitable**: No model will achieve perfect accuracy because many building decisions involve genuine sustainability trade-offs where reasonable people might disagree.
 
 3. **Context matters tremendously**: Regional differences in building practices, climate considerations, and local regulations mean that a truly effective model would need to be regionally calibrated.
 
 4. **Balanced metrics are essential**: Looking at accuracy alone was misleading - examining the confusion matrix and SDG coverage provided much more insight into model performance.
 
-5. **Human evaluation complements metrics**: The qualitative feedback from domain experts revealed aspects of model performance that quantitative metrics missed entirely.
+5. **Qualitative review is necessary**: Looking at specific examples and analyzing the outputs qualitatively revealed issues that weren't captured by the metrics alone.
 
 ## Next Steps
 
